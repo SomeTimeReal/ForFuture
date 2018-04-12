@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ssm.dao.StudentDao">
+    <insert id="addStudent" parameterType="com.ssm.model.Student">
+        INSERT INTO  student (create_time,update_time,name,username,password) values (now(),sysdate(),#{name},#{username},#{password})
+    </insert>
+    <update id="updateStudent" parameterType="com.ssm.model.Student">
+        UPDATE student SET  update_time= sysdate(),
+        name=#{name},
+        username=#{username},
+        password =#{password} where id = #{id}
+    </update>
+    <delete id="deleteStudent" parameterType="com.ssm.model.Student">
+        DELETE FROM student where id = #{id}
+    </delete>
+
+    <select id="findById" resultType="com.ssm.model.Student" parameterType="long">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.ssm.model.Student" >
+        select * from   student
+    </select>
+
+
+</mapper>
